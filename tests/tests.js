@@ -5,7 +5,7 @@ describe('max', function() {
 	it('Should take 2 arguments', function(){
 		expect(function() { max() }).to.throw('No arguments were passed to the function.');
 		expect(function() { max(1) }).to.throw('Only 1 argument was passed to the function.');
-		expect(function() { max(1,2,3) }).to.throw('The function should only have 2 arguments');
+		expect(function() { max(1,2,3) }).to.throw('The function should only have 2 arguments.');
 	});
 
 	it('Both arguments should be numbers', function(){
@@ -13,7 +13,7 @@ describe('max', function() {
 		expect(function() { max(1, "cat") }).to.throw('The second argument is not a number.');
 		expect(function() { max(true, 1) }).to.throw('The first argument is not a number.');
 		expect(function() { max(10, [1,2,3]) }).to.throw('The second argument is not a number.');
-		expect(function() { max(50, {obj: yes}) }).to.throw('The second argument is not a number.');
+		expect(function() { max(50, {obj: "yes"}) }).to.throw('The second argument is not a number.');
 		expect(function() { max(0, false) }).to.throw('The second argument is not a number.');
 	});
 
@@ -43,7 +43,7 @@ describe('maxOfThree', function() {
 		expect(function() { maxOfThree(1, 2, "unicorn") }).to.throw('The third argument is not a number.');
 		expect(function() { maxOfThree(true, 1, 2) }).to.throw('The first argument is not a number.');
 		expect(function() { maxOfThree(10, [1,2,3], 9) }).to.throw('The second argument is not a number.');
-		expect(function() { maxOfThree(50, 5, {obj: yes}) }).to.throw('The second argument is not a number.');
+		expect(function() { maxOfThree(50, {obj: "yes"},5) }).to.throw('The second argument is not a number.');
 		expect(function() { maxOfThree(0, false, 2.3) }).to.throw('The second argument is not a number.');
 	});
 
@@ -72,7 +72,7 @@ describe('isVowel', function() {
 		expect(function() { isVowel(2) }).to.throw('The argument is not a string.');
 		expect(function() { isVowel(true) }).to.throw('The argument is not a string.');
 		expect(function() { isVowel([1,2,3]) }).to.throw('The argument is not a string.');
-		expect(function() { isVowel({obj: yes}) }).to.throw('The argument is not a string.');
+		expect(function() { isVowel({obj: 2}) }).to.throw('The argument is not a string.');
 	});
 
 	it('Argument should be only a single character', function(){
@@ -103,7 +103,7 @@ describe('rovarspraket', function() {
 		expect(function() { rovarspraket(2) }).to.throw('The argument is not a string.');
 		expect(function() { rovarspraket(true) }).to.throw('The argument is not a string.');
 		expect(function() { rovarspraket([1,2,3]) }).to.throw('The argument is not a string.');
-		expect(function() { rovarspraket({obj: yes}) }).to.throw('The argument is not a string.');
+		expect(function() { rovarspraket({obj: 1}) }).to.throw('The argument is not a string.');
 	});
 
 	it('Should return the string doubling the consenents and inserting o after', function() {
@@ -131,7 +131,7 @@ describe('sum', function() {
 	it('Array should contain only numbers', function(){
 		expect(function() { sum(["dog"]) }).to.throw('The argument should contain only numbers.');
 		expect(function() { sum([true, false]) }).to.throw('The argument should contain only numbers.');
-		expect(function() { sum([{obj: yes}]) }).to.throw('The argument should contain only numbers.');
+		expect(function() { sum([{obj: 5}]) }).to.throw('The argument should contain only numbers.');
 	});
 
 	it('Should return the total of all numbers in the array', function() {
@@ -156,7 +156,7 @@ describe('multiply', function() {
 		expect(function() { multiply("dog") }).to.throw('The argument is not an array.');
 		expect(function() { multiply(1) }).to.throw('The argument is not an array.');
 		expect(function() { multiply(true) }).to.throw('The argument is not an array.');
-		expect(function() { multiply({obj: yes}) }).to.throw('The argument is not an array.');
+		expect(function() { multiply({obj: 5}) }).to.throw('The argument is not an array.');
 	});
 
 	it('Array should contain only numbers', function(){
@@ -186,7 +186,7 @@ describe('reverse', function() {
 		expect(function() { reverse(2) }).to.throw('The argument is not a string.');
 		expect(function() { reverse(true) }).to.throw('The argument is not a string.');
 		expect(function() { reverse([1,2,3]) }).to.throw('The argument is not a string.');
-		expect(function() { reverse({obj: yes}) }).to.throw('The argument is not a string.');
+		expect(function() { reverse({obj: 1}) }).to.throw('The argument is not a string.');
 	});
 
 	it('Should return the reversal of the given string', function() {
@@ -241,14 +241,14 @@ describe('filterLongWords', function() {
 		expect(function() { filterLongWords({obj: yes}, 10) }).to.throw('The argument is not an array.');
 	});
 
-	it('Second argument should be a number'), function(){
+	it('Second argument should be a number', function(){
 		expect(function() { filterLongWords(["cat", "mouse"], "house")}).to.throw('The second argument is not a number');
 		expect(function() { filterLongWords(["cat", "mouse"], true)}).to.throw('The second argument is not a number');
 		expect(function() { filterLongWords(["cat", "mouse"], [1])}).to.throw('The second argument is not a number');
 		expect(function() { filterLongWords(["cat", "mouse"], {obj: yeah})}).to.throw('The second argument is not a number');
 	});
 
-	it('Second argument should be a positive number'), function() {
+	it('Second argument should be a positive number', function() {
 		expect(function() { filterLongWords(["cat", "mouse"], -5)}).to.throw('The second argument is not a positive number');
 	});
 

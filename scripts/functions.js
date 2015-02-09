@@ -6,18 +6,81 @@
 // Define a function max() that takes two numbers as arguments and returns the largest of them. Use the if-then-else construct available in Javascript.
 // ---------------------
 
-function max(){
+function max(num1, num2){
     "use strict";
-    //...
+    var largest = null;
+
+    if(arguments.length === 0) {
+        throw "No arguments were passed to the function.";
+    } else if(arguments.length === 1) {
+        throw "Only 1 argument was passed to the function.";
+    } else if(arguments.length > 2) {
+        throw "The function should only have 2 arguments.";
+    }
+
+    if(!_.isNumber(num1)) {
+        throw "The first argument is not a number.";
+    } 
+    if(!_.isNumber(num2)) {
+        throw "The second argument is not a number.";
+    }
+
+    if(num1 === num2) {
+        largest = num1;
+    } else if (num1 > num2) {
+        largest = num1;
+    } else {
+        largest = num2;
+    }
+    
+    return largest;
 }
 
 // ---------------------
 // Define a function maxOfThree() that takes three numbers as arguments and returns the largest of them.
 // ---------------------
 
-function maxOfThree(){
+function maxOfThree(num1, num2, num3){
     "use strict";
-    //...
+
+    var largest = null;
+
+    if(arguments.length === 0) {
+        throw "No arguments were passed to the function.";
+    } else if(arguments.length === 1) {
+        throw "Only one argument was passed to the function.";
+    } else if(arguments.length === 2) {
+        throw "Only two arguments were passed to the function.";
+    } else if(arguments.length > 3) {
+        throw "The function should only have 3 arguments.";
+    }
+
+    if(!_.isNumber(num1)) {
+        throw "The first argument is not a number.";
+    } 
+    if(!_.isNumber(num2)) {
+        throw "The second argument is not a number.";
+    }
+    if(!_.isNumber(num3)) {
+        throw "The third argument is not a number.";
+    }
+
+    if(num1 >= num2) {
+        largest = num1;
+        if(num3 >= largest) {
+            largest = num3;
+        }
+    } else if(num2 >= num3) {
+        largest = num2;
+    } else {
+        largest = num3;
+    }
+
+    return largest;
+
+
+
+
 }
 
 // ---------------------
