@@ -85,8 +85,9 @@ describe('isVowel', function() {
 		expect(isVowel("C")).to.equal(false);
 		expect(isVowel("c")).to.equal(false);
 		expect(isVowel("A")).to.equal(true);
+		expect(isVowel("a")).to.equal(true);
 		expect(isVowel("e")).to.equal(true);
-		expect(isVowel("Y")).to.equal(true);
+		expect(isVowel("Y")).to.equal(false);
 		expect(isVowel("O")).to.equal(true);
 		expect(isVowel("X")).to.equal(false);
 	});
@@ -125,7 +126,7 @@ describe('sum', function() {
 		expect(function() { sum("dog") }).to.throw('The argument is not an array.');
 		expect(function() { sum(1) }).to.throw('The argument is not an array.');
 		expect(function() { sum(true) }).to.throw('The argument is not an array.');
-		expect(function() { sum({obj: yes}) }).to.throw('The argument is not an array.');
+		expect(function() { sum({obj: 5}) }).to.throw('The argument is not an array.');
 	});
 
 	it('Array should contain only numbers', function(){
@@ -162,7 +163,7 @@ describe('multiply', function() {
 	it('Array should contain only numbers', function(){
 		expect(function() { multiply(["dog"]) }).to.throw('The argument should contain only numbers.');
 		expect(function() { multiply([true, false]) }).to.throw('The argument should contain only numbers.');
-		expect(function() { multiply([{obj: yes}]) }).to.throw('The argument should contain only numbers.');
+		expect(function() { multiply([{obj: 5}]) }).to.throw('The argument should contain only numbers.');
 	});
 
 	it('Should multiply all the numbers in the array together', function() {
@@ -193,7 +194,7 @@ describe('reverse', function() {
 		expect(reverse("cat hat")).to.equal("tah tac");
 		expect(reverse("cat")).to.equal("tac");
 		expect(reverse("crazy pants")).to.equal("stnap yzarc");
-		expect(reverse("dog bites man")).to.equal("man setib god");
+		expect(reverse("dog bites man")).to.equal("nam setib god");
 	});
 });
 
@@ -208,22 +209,22 @@ describe('findLongestWord', function() {
 		expect(function() { findLongestWord("dog") }).to.throw('The argument is not an array.');
 		expect(function() { findLongestWord(1) }).to.throw('The argument is not an array.');
 		expect(function() { findLongestWord(true) }).to.throw('The argument is not an array.');
-		expect(function() { findLongestWord({obj: yes}) }).to.throw('The argument is not an array.');
+		expect(function() { findLongestWord({obj: 5}) }).to.throw('The argument is not an array.');
 	});
 
 	it('Array should contain only strings', function(){
 		expect(function() { findLongestWord([1,2,3]) }).to.throw('The argument should contain only strings.');
 		expect(function() { findLongestWord([true, false]) }).to.throw('The argument should contain only strings.');
-		expect(function() { findLongestWord([{obj: yes}]) }).to.throw('The argument should contain only strings.');
+		expect(function() { findLongestWord([{obj: 5}]) }).to.throw('The argument should contain only strings.');
 	});
 
 	it('Should return the longest word in the array', function() {
-		expect(findLongestWord(["dog", "unicorn"])).to.equal("unicorn");
-		expect(findLongestWord(["dog"])).to.equal("dog");
-		expect(findLongestWord(["dog", "cat"])).to.equal("dog and cat are the same");
-		expect(findLongestWord(["cats", "treehouse"])).to.equal("treehouse");
-		expect(findLongestWord(["gravel", "eye"])).to.equal("gravel");
-		expect(findLongestWord(["dog", "mouse", "cat", "forest"])).to.equal("forest");
+		expect(findLongestWord(["dog", "unicorn"])).to.equal(7);
+		expect(findLongestWord(["dog"])).to.equal(3);
+		expect(findLongestWord(["dog", "cat"])).to.equal(3);
+		expect(findLongestWord(["cats", "treehouse"])).to.equal(9);
+		expect(findLongestWord(["gravel", "eye"])).to.equal(6);
+		expect(findLongestWord(["dog", "mouse", "cat", "forest"])).to.equal(6);
 	});
 });
 
@@ -231,21 +232,22 @@ describe('filterLongWords', function() {
 
 	it('Should take 2 argument', function(){
 		expect(function() { filterLongWords() }).to.throw('No arguments were passed to the function.');
-		expect(function() { filterLongWords([1,2,3],1,5) }).to.throw('The function should have 2 arguments');
+		expect(function() { filterLongWords(["cat","mouse"]) }).to.throw('The function should have 2 arguments.');
+		expect(function() { filterLongWords(["cat"],1,5) }).to.throw('The function should have 2 arguments');
 	});
 
 	it('First argument should be an array', function(){
-		expect(function() { filterLongWords("dog", 1) }).to.throw('The argument is not an array.');
-		expect(function() { filterLongWords(1, 5) }).to.throw('The argument is not an array.');
-		expect(function() { filterLongWords(true, 3) }).to.throw('The argument is not an array.');
-		expect(function() { filterLongWords({obj: yes}, 10) }).to.throw('The argument is not an array.');
+		expect(function() { filterLongWords("dog", 1) }).to.throw('The first argument is not an array.');
+		expect(function() { filterLongWords(1, 5) }).to.throw('The first argument is not an array.');
+		expect(function() { filterLongWords(true, 3) }).to.throw('The first argument is not an array.');
+		expect(function() { filterLongWords({obj: 5}, 10) }).to.throw('The first argument is not an array.');
 	});
 
 	it('Second argument should be a number', function(){
 		expect(function() { filterLongWords(["cat", "mouse"], "house")}).to.throw('The second argument is not a number');
 		expect(function() { filterLongWords(["cat", "mouse"], true)}).to.throw('The second argument is not a number');
 		expect(function() { filterLongWords(["cat", "mouse"], [1])}).to.throw('The second argument is not a number');
-		expect(function() { filterLongWords(["cat", "mouse"], {obj: yeah})}).to.throw('The second argument is not a number');
+		expect(function() { filterLongWords(["cat", "mouse"], {obj: 6})}).to.throw('The second argument is not a number');
 	});
 
 	it('Second argument should be a positive number', function() {
@@ -255,16 +257,16 @@ describe('filterLongWords', function() {
 	it('The array should contain only strings', function(){
 		expect(function() { filterLongWords([1,2,3], 10) }).to.throw('The array should contain only strings.');
 		expect(function() { filterLongWords([true, false], 5) }).to.throw('The array should contain only strings.');
-		expect(function() { filterLongWords([{obj: yes}], 3) }).to.throw('The array should contain only strings.');
+		expect(function() { filterLongWords([{obj: 5}], 3) }).to.throw('The array should contain only strings.');
 	});
 
 	it('Should return words longer than the parameter given', function() {
-		expect(filterLongWords(["dog", "unicorn"], 5)).to.equal("unicorn");
-		expect(filterLongWords(["dog"],10)).to.equal("No Match");
-		expect(filterLongWords(["dog", "cat"], 2)).to.equal("dog","cat");
-		expect(filterLongWords(["cats", "treehouse"], 5)).to.equal("treehouse");
-		expect(filterLongWords(["gravel", "eye"], 3)).to.equal("gravel");
-		expect(filterLongWords(["dog", "mouse", "cat", "forest"], 3)).to.equal("mouse","forest");
+		expect(filterLongWords(["dog", "slayer"], 5)).to.eql(["slayer"]);
+		expect(filterLongWords(["dog"],10)).to.eql([]);
+		expect(filterLongWords(["dog", "cat"], 2)).to.eql(["dog","cat"]);
+		expect(filterLongWords(["cats", "treehouse"], 5)).to.eql(["treehouse"]);
+		expect(filterLongWords(["gravel", "eye"], 3)).to.eql(["gravel"]);
+		expect(filterLongWords(["dog", "mouse", "cat", "forest"], 3)).to.eql(["mouse","forest"]);
 	});
 });
 
@@ -279,14 +281,14 @@ describe('charFreq', function() {
 		expect(function() { charFreq(2) }).to.throw('The argument is not a string.');
 		expect(function() { charFreq(true) }).to.throw('The argument is not a string.');
 		expect(function() { charFreq([1,2,3]) }).to.throw('The argument is not a string.');
-		expect(function() { charFreq({obj: yes}) }).to.throw('The argument is not a string.');
+		expect(function() { charFreq({obj: 5}) }).to.throw('The argument is not a string.');
 	});
 
 	it('Should return an object containing the frequency of each character in the given string', function() {
-		expect(charFreq("aaaAA")).to.equal({a:3, A:2});
-		expect(charFreq("cacaca")).to.equal({a:3, c:3});
-		expect(charFreq("aabbccddee")).to.equal({a:2, b:2 , c:2, d:2 ,e:2 });
-		expect(charFreq("aa bb ee gg aa")).to.equal({a:4, b:2, e:2, g:2});
+		expect(charFreq("aaaAA")).to.eql({a:3, A:2});
+		expect(charFreq("cacaca")).to.eql({a:3, c:3});
+		expect(charFreq("aabbccddee")).to.eql({a:2,b:2,c:2,d:2,e:2});
+		expect(charFreq("aa bb ee gg aa")).to.eql({a:4,b:2,e:2,g:2});
 	});
 });
 
